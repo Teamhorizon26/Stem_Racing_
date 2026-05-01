@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Team Horizon | Horizon Racing</title>
+  
+  <!-- FUENTES ACTUALIZADAS: Orbitron para títulos importantes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Lexend:wght@100..900&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Russo+One&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <style>
+    /* ---------- GLOBAL RESET & FONTS ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #000000;
+      font-family: 'Space Grotesk', 'Poppins', 'Inter', 'Google Sans', system-ui, sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    /* Títulos importantes con Orbitron + degradado */
+    h1, h2, h3, .section-header h3, .brand-text, .card-title, 
+    .card-concept .heading, .card-team > section h2, .contact-header h2,
+    .sponsor-card-new .title {
+      font-family: 'Orbitron', 'Russo One', 'Rajdhani', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #FF6B00, #9b4dff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    /* Descripciones y textos generales con Space Grotesk */
+    p, .description-text, .desc, .card-desc, .card-role, .contact-value, .footer-bottom, 
+    .nav-link, .cta-button, .email-link, .card-concept .description-text, .card-team > section p {
+      font-family: 'Space Grotesk', 'Poppins', sans-serif;
+      font-weight: 400;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 110px 20px 20px 20px;
+    }
+
+    /* Smooth scroll margin para evitar que la navbar tape las secciones */
+    .section, .sponsors-section, .contact-section, .instagram-carousel-section, #hero-start, #core-concepts, #meet-team, #regional2026, #sponsors, #contact-section {
+      scroll-margin-top: 100px;
+    }
+
+    /* ---------- CARRUSEL PRINCIPAL (sin flechas) ---------- */
+    .hero-wrapper {
+      width: 100%;
+      margin: 20px auto 30px auto;
+      max-width: 1000px;
+    }
+    .carousel-3d {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      background: #010201;
+      border-radius: 24px;
+      border: 1px solid rgba(155, 77, 255, 0.3);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+    .carousel-3d .slide {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+    }
+    .carousel-3d .item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      background-position: 50% 50%;
+      background-size: cover;
+      transition: opacity 0.8s ease;
+      opacity: 0;
+      background-color: #000;
+    }
+    .carousel-3d .slide .item:nth-child(1) {
+      opacity: 1;
+      z-index: 2;
+    }
+    .carousel-3d .slide .item:nth-child(n+2) {
+      opacity: 0;
+      z-index: 1;
+    }
+    .carousel-3d .button { display: none; }
+    @media (max-width: 768px) { .carousel-3d { height: 300px; } }
+
+    /* ---------- CARRUSEL REGIONAL 3D ---------- */
+    .regional-carousel-wrapper {
+      width: 100%;
+      margin: 20px auto 40px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 400px;
+      perspective: 1200px;
+    }
+    .carousel-3d-regional {
+      position: relative;
+      width: 320px;
+      height: 260px;
+      margin: 0 auto;
+      transform-style: preserve-3d;
+      animation: rotate360 45s infinite linear;
+    }
+    .carousel__face {
+      position: absolute;
+      width: 300px;
+      height: 200px;
+      top: 30px;
+      left: 10px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(155, 77, 255, 0.6);
+      border: 1px solid rgba(255,107,0,0.5);
+    }
+    .carousel__face span { display: none; }
+    .carousel-3d-regional .carousel__face:nth-child(1) { transform: rotateY(0deg) translateZ(280px); }
+    .carousel-3d-regional .carousel__face:nth-child(2) { transform: rotateY(60deg) translateZ(280px); }
+    .carousel-3d-regional .carousel__face:nth-child(3) { transform: rotateY(120deg) translateZ(280px); }
+    .carousel-3d-regional .carousel__face:nth-child(4) { transform: rotateY(180deg) translateZ(280px); }
+    .carousel-3d-regional .carousel__face:nth-child(5) { transform: rotateY(240deg) translateZ(280px); }
+    .carousel-3d-regional .carousel__face:nth-child(6) { transform: rotateY(300deg) translateZ(280px); }
+    @keyframes rotate360 {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(-360deg); }
+    }
+    @media (max-width: 768px) {
+      .carousel-3d-regional { width: 260px; height: 220px; transform: scale(0.8); }
+      .carousel__face { width: 240px; height: 160px; transform: translateZ(200px); }
+      .carousel-3d-regional .carousel__face:nth-child(1) { transform: rotateY(0deg) translateZ(200px); }
+      .carousel-3d-regional .carousel__face:nth-child(2) { transform: rotateY(60deg) translateZ(200px); }
+      .carousel-3d-regional .carousel__face:nth-child(3) { transform: rotateY(120deg) translateZ(200px); }
+      .carousel-3d-regional .carousel__face:nth-child(4) { transform: rotateY(180deg) translateZ(200px); }
+      .carousel-3d-regional .carousel__face:nth-child(5) { transform: rotateY(240deg) translateZ(200px); }
+      .carousel-3d-regional .carousel__face:nth-child(6) { transform: rotateY(300deg) translateZ(200px); }
+    }
+
+    /* ---------- RESTO DEL SITE ---------- */
+    .hero-card { background-color: transparent; padding: 0; border: none; box-shadow: none; }
+    .section { margin-bottom: 50px; }
+    .section-header { text-align: center; margin: 20px 0 24px 0; }
+    .section-header h3 {
+      font-family: 'Orbitron', 'Russo One', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #FF6B00, #9b4dff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    .section-header p { color: #FF6B00; font-size: 0.9rem; margin-top: 8px; }
+    
+    /* CORE CONCEPTS: en desktop 4 columnas, en móvil 1 columna */
+    .cards-grid { 
+      display: grid; 
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 20px; 
+      justify-content: center; 
+      align-items: stretch; 
+    }
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+    .card-concept {
+      width: 100%;
+      min-height: 320px;
+      padding: 14px 12px;
+      color: white;
+      background: linear-gradient(#000000, #000000) padding-box,
+                  linear-gradient(145deg, transparent 35%, #9b4dff, #FF6B00) border-box;
+      border: 2px solid transparent;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+      box-shadow: 0 15px 25px -10px rgba(0,0,0,0.5);
+    }
+    .card-concept:hover { rotate: 5deg; transform: scale(1.02); box-shadow: 0 25px 30px -12px rgba(155, 77, 255, 0.35); }
+    .card-concept .heading {
+      font-family: 'Orbitron', 'Russo One', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, #e0e0e0);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin: 8px 0 4px;
+    }
+    .card-concept .description-text { font-size: 0.7rem; line-height: 1.35; color: #e5e5e5; margin: 4px 0 10px; }
+    .card-concept .categories { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; }
+    .card-concept .categories span {
+      background: linear-gradient(120deg, #9b4dff, #7c3aed);
+      padding: 2px 6px;
+      font-size: 7px;
+      border-radius: 30px;
+      color: white;
+    }
+    
+    /* ========== SPONSORS: ORGANIZADOS ========== */
+    .sponsors-section {
+      max-width: 1400px;
+      margin: 0 auto 4rem auto;
+      padding: 0 20px;
+    }
+    .sponsor-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 30px;
+      align-items: stretch;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    @media (min-width: 1200px) {
+      .sponsor-grid {
+        flex-wrap: nowrap;
+        justify-content: center;
+      }
+      .sponsor-card-new {
+        max-width: 270px;
+        min-width: 240px;
+      }
+    }
+    @media (max-width: 1199px) {
+      .sponsor-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .sponsor-card-new {
+        max-width: 320px;
+      }
+    }
+    .sponsor-card-new {
+      background: #000000;
+      border-radius: 24px;
+      border: 1px solid rgba(155, 77, 255, 0.4);
+      box-shadow: 0 15px 25px -10px rgba(0,0,0,0.5);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s, border-color 0.3s;
+      width: 100%;
+      backdrop-filter: blur(2px);
+      min-height: 280px;
+      justify-content: space-between;
+    }
+    .sponsor-card-new:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px rgba(155, 77, 255, 0.25);
+      border-color: #FF6B00;
+    }
+    .sponsor-card-new .img-avatar {
+      width: 90px;
+      height: 90px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      box-shadow: 0 0 8px rgba(155,77,255,0.3);
+      border: 1px solid rgba(255,107,0,0.3);
+      margin-bottom: 0.8rem;
+    }
+    .sponsor-card-new .img-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+    .sponsor-card-new .card-text {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .sponsor-card-new .title-total {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .sponsor-card-new .title-total .title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: 'Orbitron', 'Russo One', sans-serif;
+      background: linear-gradient(135deg, #FF6B00, #9b4dff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+      white-space: normal;
+      word-break: break-word;
+      line-height: 1.2;
+      min-height: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sponsor-card-new .desc {
+      font-size: 0.65rem;
+      color: #ccc;
+      line-height: 1.35;
+      margin-bottom: 0.8rem;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+    .sponsor-card-new .actions .email-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(155, 77, 255, 0.5);
+      border-radius: 40px;
+      padding: 5px 12px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: #FF6B00;
+      text-decoration: none;
+      transition: 0.3s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .sponsor-card-new .actions .email-link:hover {
+      background: linear-gradient(135deg, #FF6B00, #9b4dff);
+      color: #000;
+      border-color: white;
+      transform: scale(1.02);
+    }
+    @media (max-width: 768px) {
+      .sponsor-card-new { padding: 0.8rem; min-height: 260px; }
+      .sponsor-card-new .img-avatar { width: 70px; height: 70px; }
+      .sponsor-card-new .title-total .title { font-size: 0.75rem; }
+      .sponsor-card-new .desc { font-size: 0.6rem; }
+      .sponsor-card-new .actions .email-link { font-size: 0.55rem; padding: 4px 8px; }
+    }
+
+    /* ========== TEAM CARDS: Mejora móvil con Intersection Observer ========== */
+    .team-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    @media (max-width: 1200px) { .team-grid { flex-wrap: wrap; justify-content: center; } }
+    .card-team {
+      --bg: #0a0a0a;
+      --title-color: #fff;
+      --title-color-hover: #FF6B00;
+      --text-color: #ccc;
+      background: var(--bg);
+      border-radius: 2rem;
+      padding: 0.5rem;
+      width: 20rem;
+      min-width: 250px;
+      height: 30rem;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+    .card-team:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(155,77,255,0.3); }
+    .card-team::before {
+      content: "";
+      position: absolute;
+      width: calc(100% - 1rem);
+      height: 30%;
+      bottom: 0.5rem;
+      left: 0.5rem;
+      mask: linear-gradient(#0000, #000f 80%);
+      backdrop-filter: blur(1rem);
+      border-radius: 0 0 1.5rem 1.5rem;
+      translate: 0 0;
+      transition: translate 0.25s;
+      z-index: 1;
+    }
+    .card-team > img {
+      max-width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      object-position: 50% 5%;
+      border-radius: 1.5rem;
+      display: block;
+      transition: aspect-ratio 0.25s, object-position 0.5s;
+      width: 100%;
+      height: auto;
+    }
+    .card-team > section {
+      margin: 1rem;
+      height: calc(33.3333% - 1rem);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 2;
+    }
+    .card-team > section h2 {
+      margin: 0;
+      margin-block-end: 1rem;
+      font-size: 1.5rem;
+      opacity: 0;
+      translate: 0 -200%;
+      transition: color 0.5s, margin-block-end 0.25s, opacity 0.6s, translate 0.25s;
+    }
+    .card-team > section p {
+      font-size: 0.85rem;
+      line-height: 1.3;
+      color: var(--text-color);
+      opacity: 0;
+      margin: 0;
+      translate: 0 100%;
+      transition: margin-block-end 0.25s, opacity 0.6s 0.1s, translate 0.25s 0.1s;
+    }
+    /* Estado hover para desktop */
+    .card-team:hover::before { translate: 0 100%; }
+    .card-team:hover > img { aspect-ratio: 1 / 1; object-position: 50% 10%; }
+    .card-team:hover > section h2, .card-team:hover > section p { translate: 0 0; margin-block-end: 0.5rem; opacity: 1; }
+    .card-team:hover > section h2 { color: var(--title-color-hover); }
+    
+    /* Estado activo para móvil (mediante clase .team-card-visible) */
+    .card-team.team-card-visible::before { translate: 0 100%; }
+    .card-team.team-card-visible > img { aspect-ratio: 1 / 1; object-position: 50% 10%; transition: aspect-ratio 0.4s, object-position 0.4s; }
+    .card-team.team-card-visible > section h2, 
+    .card-team.team-card-visible > section p { translate: 0 0; margin-block-end: 0.5rem; opacity: 1; }
+    .card-team.team-card-visible > section h2 { color: var(--title-color-hover); }
+    .card-team.team-card-visible .role-tag { opacity: 1; translate: 0 0; }
+    
+    .card-team .role-tag {
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #FFD966;
+      opacity: 0;
+      translate: 0 100%;
+      transition: opacity 0.4s 0.15s, translate 0.25s 0.15s;
+    }
+    .card-team:hover .role-tag,
+    .card-team.team-card-visible .role-tag { opacity: 1; translate: 0 0; }
+
+    /* ========== NAVBAR: MÁS TRANSPARENTE Y TEXTO PEQUEÑO, menú móvil con mismo estilo ========== */
+    .navbar-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; width: calc(100% - 40px); max-width: 1200px; }
+    .navbar { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(12px); border: 1px solid rgba(155,77,255,0.2); border-radius: 60px; padding: 6px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+    .navbar-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand-logo-img { height: 38px; width: auto; border-radius: 0; border: none; }
+    .brand-text {
+      font-weight: 700;
+      font-size: 1.1rem;
+      font-family: 'Orbitron', 'Russo One', sans-serif;
+      background: linear-gradient(135deg, #FF6B00, #9b4dff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .navbar-nav { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-link { display: flex; align-items: center; gap: 4px; padding: 6px 14px; text-decoration: none; color: rgba(255,255,240,0.9); font-weight: 500; font-size: 0.75rem; border-radius: 40px; transition: 0.3s; }
+    .nav-link:hover { background: rgba(155,77,255,0.2); color: white; transform: translateY(-2px); }
+    .nav-link.active { background: linear-gradient(135deg, rgba(255,107,0,0.25), rgba(155,77,255,0.25)); color: white; }
+    .nav-icon { width: 16px; height: 16px; fill: currentColor; }
+    .cta-button { background: linear-gradient(135deg, #FF6B00, #9b4dff); color: white; padding: 6px 16px; border-radius: 40px; font-weight: 600; margin-left: 8px; text-decoration: none; font-size: 0.75rem; }
+    .mobile-toggle { display: none; background: none; border: none; cursor: pointer; }
+    .hamburger { display: flex; flex-direction: column; gap: 5px; width: 26px; }
+    .hamburger span { width: 100%; height: 2px; background: #FF6B00; border-radius: 5px; transition: 0.3s; }
+    .mobile-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(12px); z-index: 1500; opacity: 0; visibility: hidden; transition: 0.3s; }
+    .mobile-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #000000; z-index: 1600; transform: translateY(-100%); transition: 0.4s; overflow-y: auto; }
+    .mobile-menu.active { transform: translateY(0); }
+    .mobile-menu-header { display: flex; justify-content: space-between; padding: 25px; border-bottom: 1px solid #FF6B00; }
+    .mobile-menu-close { background: none; border: none; font-size: 2.2rem; color: #FF6B00; cursor: pointer; }
+    .mobile-menu-nav { padding: 30px 25px; list-style: none; }
+    .mobile-menu-link { display: flex; align-items: center; gap: 16px; padding: 16px 22px; background: rgba(255,107,0,0.1); border: 1px solid #9b4dff; border-radius: 50px; text-decoration: none; color: white; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
+    .mobile-menu-link:hover { background: rgba(155,77,255,0.3); }
+    .mobile-cta { margin: 20px 25px; }
+    .mobile-cta-button { display: block; text-align: center; background: linear-gradient(135deg, #FF6B00, #9b4dff); padding: 14px; border-radius: 50px; text-decoration: none; color: white; font-size: 0.9rem; }
+    @media (max-width: 992px) { .navbar-nav { display: none; } .mobile-toggle { display: flex; } .container { padding-top: 100px; } }
+    
+    /* Ocultar sección de Instagram solo en móvil */
+    @media (max-width: 768px) {
+      .instagram-carousel-section {
+        display: none;
+      }
+    }
+    
+    /* Galaxy button */
+    .galaxy-slogan-wrapper { display: flex; justify-content: center; margin: 20px auto 30px; }
+    .galaxy-button { position: relative; --hue: 260; --active: 0; --transition: 0.25s; --spark: 1.8s; }
+    .galaxy-button button {
+      --cut: 0.1em;
+      --active: 0;
+      --bg: radial-gradient(120% 120% at 126% 126%, hsl(var(--hue) calc(var(--active) * 97%) 98% / calc(var(--active) * 0.9)) 40%, transparent 50%) calc(100px - (var(--active) * 100px)) 0 / 100% 100% no-repeat,
+            radial-gradient(120% 120% at 120% 120%, hsl(var(--hue) calc(var(--active) * 97%) 70% / calc(var(--active) * 1)) 30%, transparent 70%) calc(100px - (var(--active) * 100px)) 0 / 100% 100% no-repeat,
+            hsl(var(--hue) calc(var(--active) * 100%) calc(12% - (var(--active) * 8%)));
+      background: var(--bg);
+      font-size: clamp(1.2rem, 5vw, 2rem);
+      font-weight: 600;
+      font-family: 'Orbitron', 'Russo One', 'Poppins', sans-serif;
+      border: 0;
+      cursor: pointer;
+      padding: 0.8em 1.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25em;
+      white-space: normal;
+      text-align: center;
+      border-radius: 3rem;
+      position: relative;
+      box-shadow: 0 0 calc(var(--active) * 6em) calc(var(--active) * 3em) hsl(var(--hue) 97% 61% / 0.5),
+                  0 0.05em 0 0 hsl(var(--hue) calc(var(--active) * 97%) calc((var(--active) * 50%) + 30%)) inset,
+                  0 -0.05em 0 0 hsl(var(--hue) calc(var(--active) * 97%) calc(var(--active) * 10%)) inset;
+      transition: box-shadow var(--transition), scale var(--transition), background var(--transition);
+      scale: calc(1 + (var(--active) * 0.05));
+    }
+    .galaxy-button button:active { scale: 1; }
+    .galaxy-button:hover button { --active: 1; }
+    .galaxy-button .star {
+      height: calc(var(--size) * 1px);
+      aspect-ratio: 1;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      opacity: var(--alpha);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(10deg) rotate(0deg) translateY(calc(var(--distance) * 1px));
+      animation: orbit calc(var(--duration) * 1s) calc(var(--delay) * -1s) infinite linear;
+    }
+    @keyframes orbit {
+      to { transform: translate(-50%, -50%) rotate(10deg) rotate(360deg) translateY(calc(var(--distance) * 1px)); }
+    }
+    .galaxy-button .galaxy { position: absolute; width: 100%; aspect-ratio: 1; top: 50%; left: 50%; translate: -50% -50%; overflow: hidden; opacity: var(--active); transition: opacity var(--transition); pointer-events: none; }
+    .galaxy-button .galaxy__ring { height: 200%; width: 200%; position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-28%, -40%) rotateX(-24deg) rotateY(-30deg) rotateX(90deg); transform-style: preserve-3d; }
+    .galaxy-button .galaxy__container { position: absolute; inset: 0; opacity: var(--active); transition: opacity var(--transition); mask: radial-gradient(white, transparent); pointer-events: none; }
+    .galaxy-button .text { translate: 0%; letter-spacing: 0.02ch; color: hsl(0 0% calc(60% + (var(--active) * 26%))); z-index: 2; position: relative; font-weight: 700; text-shadow: 0 0 8px rgba(155, 77, 255, 0.3); }
+    
+    /* Contact section */
+    .contact-section { margin: 0 auto 60px auto; max-width: 800px; }
+    .contact-header { text-align: center; margin-bottom: 30px; }
+    .contact-header h2 { font-family: 'Orbitron', 'Russo One', sans-serif; font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, #FF6B00, #9b4dff); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .contact-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
+    .contact-card { width: 280px; padding: 24px 16px; text-align: center; cursor: pointer; background: linear-gradient(#000000, #000000) padding-box, linear-gradient(145deg, transparent 35%, #9b4dff, #FF6B00) border-box; border: 2px solid transparent; border-radius: 12px; transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1); }
+    .contact-card:hover { rotate: 5deg; transform: scale(1.02); }
+    .contact-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; color: #FF6B00; margin-top: 8px; text-transform: uppercase; }
+    .contact-value { font-size: 0.85rem; word-break: break-word; margin-top: 6px; color: #ddd; }
+    .footer-bottom { text-align: center; margin: 40px 0 20px; padding: 20px 0; border-top: 1px solid rgba(255,107,0,0.3); font-size: 0.75rem; color: #888; }
+    .instagram-carousel-section { max-width: 1000px; margin: 10px auto 60px auto; width: 100%; }
+    .ft { background-color: #000000 !important; border-radius: 16px; padding: 10px; width: 100% !important; overflow-x: auto !important; }
+  </style>
+</head>
+<body>
+<nav class="navbar-container">
+  <div class="navbar">
+    <a href="#" class="navbar-brand"><img src="https://i.imgur.com/BD2cuTI.jpg" class="brand-logo-img" alt="logo"><span class="brand-text">Team Horizon</span></a>
+    <ul class="navbar-nav">
+      <li><a href="#hero-start" class="nav-link"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9,22 9,12 15,12 15,22"></polyline></svg><span>Home</span></a></li>
+      <li><a href="#core-concepts" class="nav-link"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span>About</span></a></li>
+      <li><a href="#meet-team" class="nav-link"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Team</span></a></li>
+      <li><a href="#regional2026" class="nav-link"><svg class="nav-icon" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M8 12h8"></path></svg><span>Regional 2026</span></a></li>
+      <li><a href="#sponsors" class="nav-link"><svg class="nav-icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 3h6v4"></path><path d="m22 7-10-4-10 4"></path></svg><span>Sponsors</span></a></li>
+      <li><a href="#contact-section" class="nav-link"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span>Contact</span></a></li>
+      <li><a href="https://instagram.com/teamhorizonn" target="_blank" class="cta-button">Follow Us</a></li>
+    </ul>
+    <button class="mobile-toggle" id="mobileToggle"><div class="hamburger"><span></span><span></span><span></span></div></button>
+  </div>
+</nav>
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header"><a href="#" class="navbar-brand"><img src="https://i.imgur.com/BD2cuTI.jpg" style="height:40px; border:none;"><span class="brand-text">Horizon</span></a><button class="mobile-menu-close" id="mobileMenuClose">×</button></div>
+  <ul class="mobile-menu-nav"><li><a href="#hero-start" class="mobile-menu-link">Home</a></li><li><a href="#core-concepts" class="mobile-menu-link">About</a></li><li><a href="#meet-team" class="mobile-menu-link">Team</a></li><li><a href="#regional2026" class="mobile-menu-link">Regional 2026</a></li><li><a href="#sponsors" class="mobile-menu-link">Sponsors</a></li><li><a href="#contact-section" class="mobile-menu-link">Contact</a></li></ul>
+  <div class="mobile-cta"><a href="https://instagram.com/teamhorizonn" target="_blank" class="mobile-cta-button">Follow on Instagram</a></div>
+</div>
+
+<div class="container">
+  <div id="hero-start"></div>
+  <!-- CARRUSEL PRINCIPAL -->
+  <div class="hero-wrapper">
+    <div class="carousel-3d">
+      <div class="slide" id="dynamicSlide"></div>
+    </div>
+  </div>
+
+  <div class="galaxy-slogan-wrapper"><div class="galaxy-button"><button><span class="spark"></span><span class="backdrop"></span><span class="galaxy__container"><span class="star star--static"></span></span><span class="galaxy"><span class="galaxy__ring"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span></span><span class="text">Advancing Towards the Horizon</span></button><div class="bodydrop"></div></div></div>
+
+  <!-- CORE CONCEPTS -->
+  <div class="section" id="core-concepts"><div class="section-header"><h3>Core Concepts</h3><p>Horizon's philosophy and methodology</p></div><div class="cards-grid">
+    <div class="card-concept"><div class="heading">Horizon Engineering</div><div class="description-text">Horizon is a STEM Racing team operating under a defined structure where each area — engineering, design, manufacturing, and management — fulfills a specific function within the same system. The development of the single-seater is not an isolated task but the result of a controlled process that integrates analysis, decision-making, and technical execution.</div><div class="categories"><span>Engineering</span><span>Design</span><span>Fabrication</span></div></div>
+    <div class="card-concept"><div class="heading">Our Approach</div><div class="description-text">The team focuses on designing and fabricating its own modular car through structured methodologies, utilising modelling, simulation, and validation tools to optimise performance. Each vehicle iteration responds to data obtained from tests and evaluations, enabling progressive and measurable improvement.</div><div class="categories"><span>Modelling</span><span>Simulation</span><span>Data-Driven</span></div></div>
+    <div class="card-concept"><div class="heading">Continuous Evolution</div><div class="description-text">Horizon does not base its operation on isolated results but on process consistency. Discipline in time management, precision in decision-making, and coherence in execution reduce errors and increase team efficiency at each development phase.</div><div class="categories"><span>Discipline</span><span>Precision</span><span>Coherence</span></div></div>
+    <div class="card-concept"><div class="heading">The Horizon Concept</div><div class="description-text">The motto "Advancing Towards the Horizon" reflects Horizon's philosophy of maintaining constant, measurable progress with a clear direction in every project phase. "Advancing" represents continuous action and progressive improvement, "Towards" indicates a defined course guiding the team's decisions, and "the Horizon" symbolises dynamic goals and higher standards that steer the team's structured evolution.</div><div class="categories"><span>Optimisation</span><span>Evolution</span></div></div>
+  </div></div>
+
+  <!-- TEAM SECTION -->
+  <div class="section" id="meet-team"><div class="section-header"><h3>Meet Our Team</h3><p>Driving innovation and excellence</p></div>
+    <div class="team-grid">
+      <div class="card-team" data-team="0"><img src="https://i.imgur.com/G2sKaaa.jpg" alt="David"><section><h2>David</h2><p>Coordinates the project, performs and oversees car fabrication. Manages team organisation, time control, and ensures track testing is executed correctly.</p><div class="role-tag">Team Leader & Design Engineer</div></section></div>
+      <div class="card-team" data-team="1"><img src="https://i.imgur.com/U5KGQds.jpg" alt="Aurora"><section><h2>Aurora</h2><p>Manages the team's image, social media, graphic materials and website development. She also leads sponsor acquisition.</p><div class="role-tag">Marketing & Sponsorships</div></section></div>
+      <div class="card-team" data-team="2"><img src="https://i.imgur.com/YvbKv12.jpg" alt="Pedro"><section><h2>Pedro</h2><p>Designs the car in CAD, performs aerodynamic simulations, and ensures the model complies with regulations.</p><div class="role-tag">Design & Simulation</div></section></div>
+      <div class="card-team" data-team="3"><img src="https://i.imgur.com/kLtjJux.jpg" alt="Lucas"><section><h2>Lucas</h2><p>Prepares the portfolio, presentation, and pit display content. He also leads the team's sustainability initiatives and ensures responsible practice.</p><div class="role-tag">Documentation & Sustainability</div></section></div>
+    </div>
+  </div>
+
+  <!-- REGIONAL 2026 -->
+  <div class="section" id="regional2026">
+    <div class="section-header"><h3>4th Place Regional Santa Maria da Feira</h3><p>Our journey at the regional competition</p></div>
+    <div class="regional-carousel-wrapper">
+      <div class="carousel-3d-regional" id="regionalCarousel3d"></div>
+    </div>
+  </div>
+
+  <!-- SPONSORS -->
+  <div class="sponsors-section" id="sponsors"><div class="section-header"><h3>Our Sponsors</h3><p>Partners who drive innovation</p></div>
+    <div class="sponsor-grid">
+      <div class="sponsor-card-new"><div class="img-avatar"><img src="https://i.imgur.com/7UYHAyt.jpg" alt="Parâmetro Simplificado"></div><div class="card-text"><div class="title-total"><div class="title">Parâmetro Simplificado</div><div class="desc">Technical consultancy and engineering company offering optimised solutions for project management, development, and execution with focus on efficiency.</div><div class="actions"><a href="mailto:geral@parametrosimplificado.com" class="email-link"><i class="far fa-envelope"></i> geral@parametrosimplificado.com</a></div></div></div></div>
+      <div class="sponsor-card-new"><div class="img-avatar"><img src="https://i.imgur.com/R1w7pFT.jpg" alt="Luis Silva e Sónia Costa"></div><div class="card-text"><div class="title-total"><div class="title">Luis Silva e Sónia Costa</div><div class="desc">Estate agency specialised in property purchase, sale, and management, offering personalised service to find suitable solutions for each client.</div><div class="actions"><a href="mailto:geral@luisesonia.com" class="email-link"><i class="far fa-envelope"></i> geral@luisesonia.com</a></div></div></div></div>
+      <div class="sponsor-card-new"><div class="img-avatar"><img src="https://i.imgur.com/zCS1Doh.jpg" alt="EPPB"></div><div class="card-text"><div class="title-total"><div class="title">EPPB</div><div class="desc">Professional training institution providing skilled workforce development programs.</div><div class="actions"><a href="mailto:geral@eppb.pt" class="email-link"><i class="far fa-envelope"></i> geral@eppb.pt</a></div></div></div></div>
+      <div class="sponsor-card-new"><div class="img-avatar"><img src="https://i.imgur.com/26hbDW0.jpg" alt="C T COR"></div><div class="card-text"><div class="title-total"><div class="title">C T COR</div><div class="desc">Technology centre specialised in cork industry research, development, and innovation, promoting sustainable and technologically advanced solutions.</div><div class="actions"><a href="mailto:geral@ctcor.com" class="email-link"><i class="far fa-envelope"></i> geral@ctcor.com</a></div></div></div></div>
+    </div>
+  </div>
+
+  <!-- Instagram & Contact: solo visible en desktop por CSS -->
+  <div class="instagram-carousel-section"><div class="section-header"><h3>Latest Posts</h3><p>Follow us on <a href="https://instagram.com/teamhorizonn" target="_blank" style="color:#FF6B00;">@teamhorizonn</a></p></div><div data-key="Instagram Hashtag Carousel" class="ft" id="ftmk98t91"></div><script src="https://wdg.fouita.com/widgets/0x42da90.js"></script></div>
+
+  <div class="contact-section" id="contact-section"><div class="contact-header"><h2>Get in Touch</h2></div><div class="contact-row"><div class="contact-card" onclick="window.open('https://instagram.com/teamhorizonn','_blank')"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FF6B00"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg><div class="contact-label">INSTAGRAM</div><div class="contact-value">@teamhorizonn</div></div><div class="contact-card" onclick="location.href='mailto:Teamhorizon.steamracing@gmail.com'"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FF6B00"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><div class="contact-label">GMAIL</div><div class="contact-value">Teamhorizon.steamracing@gmail.com</div></div></div></div>
+  <div class="footer-bottom">OFFICIAL PAGE OF TEAM HORIZON | STEM RACING 2025/2026</div>
+</div>
+
+<script>
+  // --- CARRUSEL PRINCIPAL (automático) ---
+  const images = [
+    "https://i.imgur.com/t1M6brZ.jpeg?fb",
+    "https://i.imgur.com/N4o9uny.jpeg?fb",
+    "https://i.imgur.com/PHhKfwu.jpeg?fb",
+    "https://i.imgur.com/mXuwRLN.jpeg?fb",
+    "https://i.imgur.com/NimXfWV.jpeg?fb",
+    "https://i.imgur.com/qWhu6HH.jpeg?fb"
+  ];
+  const slideContainer = document.querySelector("#dynamicSlide");
+  function buildCarousel() {
+    slideContainer.innerHTML = "";
+    images.forEach((src) => {
+      const item = document.createElement("div");
+      item.className = "item";
+      item.style.backgroundImage = `url('${src}')`;
+      slideContainer.appendChild(item);
+    });
+  }
+  buildCarousel();
+  let autoInterval;
+  function moveNext() {
+    let items = document.querySelectorAll("#dynamicSlide .item");
+    if (items.length) slideContainer.appendChild(items[0]);
+  }
+  function startAuto() { autoInterval = setInterval(() => moveNext(), 4500); }
+  startAuto();
+
+  // --- CARRUSEL REGIONAL 3D ---
+  const regionalImages = [
+    "https://i.imgur.com/OlswlY2.jpg",
+    "https://i.imgur.com/EZiXYGd.jpg",
+    "https://i.imgur.com/eJVbVOv.jpg",
+    "https://i.imgur.com/vGcuUtE.jpg",
+    "https://i.imgur.com/mAsxRPy.jpg",
+    "https://i.imgur.com/W8DEqSB.jpg"
+  ];
+  const regionalContainer = document.getElementById("regionalCarousel3d");
+  if (regionalContainer) {
+    regionalContainer.innerHTML = "";
+    regionalImages.forEach((src) => {
+      const face = document.createElement("div");
+      face.className = "carousel__face";
+      face.style.backgroundImage = `url('${src}')`;
+      regionalContainer.appendChild(face);
+    });
+  }
+
+  // estrellas galaxy
+  const rand = (a,b) => Math.floor(Math.random()*(b-a+1)+a);
+  document.querySelectorAll('.galaxy-button .star').forEach(s => {
+    s.setAttribute('style', `--duration:${rand(5,15)}; --delay:${rand(1,8)}; --alpha:${rand(4,9)/10}; --size:${rand(2,5)}; --distance:${rand(60,180)};`);
+  });
+
+  // mobile menu
+  const toggle = document.getElementById('mobileToggle'), menu = document.getElementById('mobileMenu'), overlay = document.getElementById('mobileMenuOverlay'), closeBtn = document.getElementById('mobileMenuClose');
+  function openM(){ menu.classList.add('active'); overlay.style.opacity='1'; overlay.style.visibility='visible'; document.body.style.overflow='hidden'; }
+  function closeM(){ menu.classList.remove('active'); overlay.style.opacity='0'; overlay.style.visibility='hidden'; document.body.style.overflow=''; }
+  toggle?.addEventListener('click',()=>{ if(menu.classList.contains('active')) closeM(); else openM();});
+  closeBtn?.addEventListener('click',closeM); overlay?.addEventListener('click',closeM);
+  document.querySelectorAll('.mobile-menu-link, .nav-link').forEach(l=>l.addEventListener('click',()=>{ if(window.innerWidth<=992) closeM(); }));
+
+  // --- INTERSECTION OBSERVER para tarjetas de equipo en móvil: al hacer scroll se activa la descripción automaticamente
+  const teamCards = document.querySelectorAll('.card-team');
+  if (teamCards.length) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('team-card-visible');
+        } else {
+          // Opcional: remover clase cuando salga para que se re-active al volver a entrar
+          entry.target.classList.remove('team-card-visible');
+        }
+      });
+    }, { threshold: 0.4 }); // 40% visible para activar
+    teamCards.forEach(card => observer.observe(card));
+  }
+
+  // active nav highlight
+  window.addEventListener('scroll',()=>{ let current=''; document.querySelectorAll('#hero-start,#core-concepts,#meet-team,#regional2026,#sponsors,#contact-section').forEach(sec=>{ if(window.scrollY>=sec.offsetTop-150) current=sec.id; }); document.querySelectorAll('.nav-link').forEach(l=>{ l.classList.remove('active'); if(l.getAttribute('href')===`#${current}`) l.classList.add('active');});});
+</script>
+</body>
+</html>
