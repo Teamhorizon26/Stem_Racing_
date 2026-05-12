@@ -56,7 +56,7 @@
     }
 
     /* Smooth scroll margin para evitar que la navbar tape las secciones */
-    .section, .sponsors-section, .contact-section, .instagram-carousel-section, #hero-start, #core-concepts, #meet-team, #regional2026, #sponsors, #contact-section {
+    .section, .sponsors-section, .contact-section, .instagram-carousel-section, #hero-start, #core-concepts, #meet-team, #regional2026, #sponsors, #contact-section, #sustainability-section {
       scroll-margin-top: 100px;
     }
 
@@ -224,6 +224,69 @@
       color: white;
     }
     
+    /* ========== TARJETAS DE SUSTENTABILIDAD (NEGRAS, SIN STICKERS) ========== */
+    .sustainability-cards {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin: 30px 0 20px;
+    }
+    .sustainability-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      height: 180px;
+      width: 260px;
+      border-radius: 20px;
+      color: white;
+      cursor: pointer;
+      transition: 400ms;
+      background: #000000;
+      border: 1px solid rgba(155, 77, 255, 0.5);
+      box-shadow: 0 15px 25px -10px rgba(0,0,0,0.7);
+      backdrop-filter: blur(2px);
+    }
+    /* Borde más brillante en hover */
+    .sustainability-card:hover {
+      transform: scale(1.1, 1.1);
+      box-shadow: 0 0 20px rgba(155, 77, 255, 0.9);
+      border-color: #FF6B00;
+    }
+    .sustainability-cards:hover > .sustainability-card:not(:hover) {
+      filter: blur(6px);
+      transform: scale(0.95, 0.95);
+    }
+    .sustainability-card p.tip {
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #FF6B00, #9b4dff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .sustainability-card p.second-text {
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0.9;
+      padding: 0 15px;
+      color: #ccc;
+    }
+    @media (max-width: 700px) {
+      .sustainability-card {
+        height: 150px;
+        width: 220px;
+      }
+      .sustainability-card p.tip { font-size: 1.1rem; }
+      .sustainability-card p.second-text { font-size: 0.7rem; }
+    }
+
     /* ========== SPONSORS: ORGANIZADOS ========== */
     .sponsors-section {
       max-width: 1400px;
@@ -579,6 +642,14 @@
     .contact-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; color: #FF6B00; margin-top: 8px; text-transform: uppercase; }
     .contact-value { font-size: 0.85rem; word-break: break-word; margin-top: 6px; color: #ddd; }
     .footer-bottom { text-align: center; margin: 40px 0 20px; padding: 20px 0; border-top: 1px solid rgba(255,107,0,0.3); font-size: 0.75rem; color: #888; }
+    .official-link-footer a {
+      color: #FF6B00;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    .official-link-footer a:hover {
+      text-decoration: underline;
+    }
     .instagram-carousel-section { max-width: 1000px; margin: 10px auto 60px auto; width: 100%; }
     .ft { background-color: #000000 !important; border-radius: 16px; padding: 10px; width: 100% !important; overflow-x: auto !important; }
   </style>
@@ -653,11 +724,39 @@
     </div>
   </div>
 
+  <!-- ========== SECCIÓN SUSTENTABILIDAD (TARJETAS NEGRAS, SIN STICKERS) ========== -->
+  <div class="section" id="sustainability-section">
+    <div class="section-header">
+      <h3>Sustainability 🌱</h3>
+      <p>Interactive activities for an eco-conscious future</p>
+    </div>
+    <div class="sustainability-cards">
+      <!-- Tarjeta 1: School Sustainability Activity (sin emoji) -->
+      <div class="sustainability-card" onclick="window.open('https://teamhorizon26.github.io/Quiz_Sustentabilidade-Escolar/', '_blank')">
+        <p class="tip">School Quiz</p>
+        <p class="second-text">Test your knowledge about sustainability in schools</p>
+      </div>
+      <!-- Tarjeta 2: Eco Sustainability Activity (sin emoji) -->
+      <div class="sustainability-card" onclick="window.open('https://teamhorizon26.github.io/Sustentability_Eco_Team_Horizon/', '_blank')">
+        <p class="tip">Eco Challenge</p>
+        <p class="second-text">Explore ecological dynamics and green solutions</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Instagram & Contact: solo visible en desktop por CSS -->
   <div class="instagram-carousel-section"><div class="section-header"><h3>Latest Posts</h3><p>Follow us on <a href="https://instagram.com/teamhorizonn" target="_blank" style="color:#FF6B00;">@teamhorizonn</a></p></div><div data-key="Instagram Hashtag Carousel" class="ft" id="ftmk98t91"></div><script src="https://wdg.fouita.com/widgets/0x42da90.js"></script></div>
 
   <div class="contact-section" id="contact-section"><div class="contact-header"><h2>Get in Touch</h2></div><div class="contact-row"><div class="contact-card" onclick="window.open('https://instagram.com/teamhorizonn','_blank')"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FF6B00"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg><div class="contact-label">INSTAGRAM</div><div class="contact-value">@teamhorizonn</div></div><div class="contact-card" onclick="location.href='mailto:Teamhorizon.steamracing@gmail.com'"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FF6B00"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><div class="contact-label">GMAIL</div><div class="contact-value">Teamhorizon.steamracing@gmail.com</div></div></div></div>
-  <div class="footer-bottom">OFFICIAL PAGE OF TEAM HORIZON | STEM RACING 2025/2026</div>
+  
+  <div class="footer-bottom">
+    <div>OFFICIAL PAGE OF TEAM HORIZON | STEM RACING 2025/2026</div>
+    <div class="official-link-footer" style="margin-top: 8px;">
+      <a href="https://teamhorizon26.github.io/stem_racing_/" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-globe"></i> Official Website: teamhorizon26.github.io/stem_racing_
+      </a>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -731,16 +830,15 @@
         if (entry.isIntersecting) {
           entry.target.classList.add('team-card-visible');
         } else {
-          // Opcional: remover clase cuando salga para que se re-active al volver a entrar
           entry.target.classList.remove('team-card-visible');
         }
       });
-    }, { threshold: 0.4 }); // 40% visible para activar
+    }, { threshold: 0.4 });
     teamCards.forEach(card => observer.observe(card));
   }
 
   // active nav highlight
-  window.addEventListener('scroll',()=>{ let current=''; document.querySelectorAll('#hero-start,#core-concepts,#meet-team,#regional2026,#sponsors,#contact-section').forEach(sec=>{ if(window.scrollY>=sec.offsetTop-150) current=sec.id; }); document.querySelectorAll('.nav-link').forEach(l=>{ l.classList.remove('active'); if(l.getAttribute('href')===`#${current}`) l.classList.add('active');});});
+  window.addEventListener('scroll',()=>{ let current=''; document.querySelectorAll('#hero-start,#core-concepts,#meet-team,#regional2026,#sponsors,#contact-section,#sustainability-section').forEach(sec=>{ if(window.scrollY>=sec.offsetTop-150) current=sec.id; }); document.querySelectorAll('.nav-link').forEach(l=>{ l.classList.remove('active'); if(l.getAttribute('href')===`#${current}`) l.classList.add('active');});});
 </script>
 </body>
 </html>
